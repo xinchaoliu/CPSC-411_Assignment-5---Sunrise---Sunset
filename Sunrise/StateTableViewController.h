@@ -7,7 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CityDatabase.h"
+#import "CityDBData.h"
+#import "CityTableViewController.h"
 
 @interface StateTableViewController : UITableViewController
+
+// Array of all states
+@property (strong, nonatomic) NSArray* states;
 
 @end

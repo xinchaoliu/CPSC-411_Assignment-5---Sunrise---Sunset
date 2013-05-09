@@ -10,4 +10,8 @@
 
 @interface timeCell : UITableViewCell
 
+@property (weak, nonatomic) IBOutlet UILabel *cityLabel;
+@property (weak, nonatomic) IBOutlet UILabel *sunriseLabel;
+@property (weak, nonatomic) IBOutlet UILabel *sunsetLabel;
+
 @end

@@ -7,7 +7,21 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "sqlite3.h"
+#import "CityDBData.h"
 
 @interface CityDatabase : NSObject
+{
+    // Connection to database
+    sqlite3* _databaseConnection;
+}
+
++ (CityDatabase*) db;
+
+// Select state from db
+- (NSArray*) selectStates;
+
+// Select city from db where state = theState
+- (NSArray*) selectCitiesInState:(NSString*)theState;
 
 @end
