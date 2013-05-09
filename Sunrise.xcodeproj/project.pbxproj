@@ -530,7 +530,6 @@
 				INFOPLIST_FILE = "Sunrise/Sunrise-Info.plist";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)/../../Library/Developer/Xcode/DerivedData/SunriseSunset-bklblifkbkglvkhgpbnhemzkztxh/Build/Products/Debug-iphoneos\"",
 					"\"$(SRCROOT)\"",
 					"\"$(SRCROOT)/Sunrise/libnova\"",
 				);
@@ -548,7 +547,6 @@
 				INFOPLIST_FILE = "Sunrise/Sunrise-Info.plist";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)/../../Library/Developer/Xcode/DerivedData/SunriseSunset-bklblifkbkglvkhgpbnhemzkztxh/Build/Products/Debug-iphoneos\"",
 					"\"$(SRCROOT)\"",
 					"\"$(SRCROOT)/Sunrise/libnova\"",
 				);
