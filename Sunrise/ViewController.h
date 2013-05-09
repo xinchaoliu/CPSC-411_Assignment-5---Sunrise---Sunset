@@ -1,5 +1,5 @@
 //
-//  StateTableViewController.h
+//  ViewController.h
 //  Sunrise
 //
 //  Created by Xinchao Liu on 5/9/13.
@@ -7,10 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "CityDBData.h"
-#import "CityTableViewController.h"
+#import "CityDatabase.h"
+#import "StateTableViewController.h"
 
-@interface StateTableViewController : UITableViewController
+@interface ViewController : UIViewController
 
 // Array of all states
 @property (strong, nonatomic) NSArray* states;

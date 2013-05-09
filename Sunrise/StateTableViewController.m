@@ -28,8 +28,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
-    states = [[CityDatabase db] selectStates];
+    
 }
 
 - (void)didReceiveMemoryWarning

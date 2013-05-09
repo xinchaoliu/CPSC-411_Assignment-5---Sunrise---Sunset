@@ -75,4 +75,13 @@
     return cell;
 }
 
+// Use segue to send the selected state
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    NSIndexPath* index = [self.tableView indexPathForSelectedRow];
+    MainTableViewController* vc = segue.destinationViewController;
+    vc.theCity = [cities objectAtIndex:index.row];
+    vc.isUsingSelectedCity = YES;
+}
+
 @end

@@ -14,14 +14,17 @@
 
 @implementation MainTableViewController
 
+@synthesize isUsingSelectedCity;
 @synthesize locationManager;
 @synthesize currentLocation;
 @synthesize geocoder;
 @synthesize placemark;
 @synthesize calcSun;
+@synthesize sunTime;
 @synthesize sunrise;
 @synthesize sunset;
-@synthesize city;
+@synthesize theCity;
+@synthesize cityText;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -35,20 +38,33 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
-    // Get location information from GPS
-    if ([CLLocationManager locationServicesEnabled]) {
-        locationManager = [[CLLocationManager alloc]init];
-        locationManager.delegate = self;
-        locationManager.desiredAccuracy = kCLLocationAccuracyBest;
-        locationManager.distanceFilter = 1000.0f;
-        [locationManager startUpdatingLocation];
-    }
-    
-    geocoder = [[CLGeocoder alloc]init];
     
     calcSun = [[SunTime alloc]init];
-        
+    cityText = @"Location updating...";
+    // Check if using location service or using manually selected location
+    if (isUsingSelectedCity)
+    {
+        // Update sun time info
+        sunTime = [calcSun sunTimeAtLatitude:theCity.latitude
+                                andLongitude:theCity.longitude];
+        // Convert result to NSString
+        NSDateFormatter* dateFormatter = [[NSDateFormatter alloc]init];
+        [dateFormatter setDateFormat:@"HH:mm:ss"];
+        sunrise = [dateFormatter stringFromDate:[sunTime objectAtIndex:0]];
+        sunset = [dateFormatter stringFromDate:[sunTime objectAtIndex:1]];
+        cityText =
+        [NSString stringWithFormat:@"%@, %@",theCity.name,theCity.state];
+    } else {
+        // Get location information from GPS
+        if ([CLLocationManager locationServicesEnabled]) {
+            locationManager = [[CLLocationManager alloc]init];
+            locationManager.delegate = self;
+            locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+            locationManager.distanceFilter = 1000.0f;
+            [locationManager startUpdatingLocation];
+        }
+        geocoder = [[CLGeocoder alloc]init];
+    }    
 }
 
 - (void)didReceiveMemoryWarning
@@ -60,10 +76,16 @@
 }
 
 // GPS Fail Alert
-- (void)locationManager:(CLLocationManager*)manager didFailWithError:(NSError *)error
+- (void)locationManager:(CLLocationManager*)manager
+       didFailWithError:(NSError *)error
 {
     NSLog(@"GPSdidFailWithError: %@",error);
-    UIAlertView* errorAlert = [[UIAlertView alloc]initWithTitle:@"Error" message:@"Faild to Get Your Location" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    UIAlertView* errorAlert =
+    [[UIAlertView alloc]initWithTitle:@"Error"
+                              message:@"Faild to Get Your Location"
+                             delegate:nil
+                    cancelButtonTitle:@"OK"
+                    otherButtonTitles:nil];
     [errorAlert show];
 }
 
@@ -78,9 +100,12 @@
     // Add updating location to refresh placemark
     [locationManager startUpdatingLocation];
     
-    // Update sun time info
-    NSArray* sunTime;
-    sunTime = [calcSun sunTimeAtLatitude:[NSString stringWithFormat:@"%.8f",currentLocation.coordinate.latitude] andLongitude:[NSString stringWithFormat:@"%.8f",currentLocation.coordinate.longitude]];
+    // Update sun time info  
+    NSString* latitude =
+    [NSString stringWithFormat:@"%.8f",currentLocation.coordinate.latitude];
+    NSString* longitude =
+    [NSString stringWithFormat:@"%.8f",currentLocation.coordinate.longitude];
+    sunTime = [calcSun sunTimeAtLatitude:latitude andLongitude:longitude];
     // Convert result to NSString
     NSDateFormatter* dateFormatter = [[NSDateFormatter alloc]init];
     [dateFormatter setDateFormat:@"HH:mm:ss"];
@@ -93,7 +118,7 @@
                    completionHandler:^(NSArray *placemarks, NSError *error)
      {
          placemark = [placemarks objectAtIndex:0];
-         city = [NSString stringWithFormat:@"%@, %@",placemark.locality,
+         cityText = [NSString stringWithFormat:@"%@, %@",placemark.locality,
                  placemark.administrativeArea];
      }];
     
@@ -107,22 +132,25 @@
     return 1;
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+- (NSInteger)tableView:(UITableView *)tableView
+ numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
     return 1;
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+- (UITableViewCell *)tableView:(UITableView *)tableView
+         cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"timeCell";
-    timeCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+    timeCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier
+                                                     forIndexPath:indexPath];
     
     // Configure the cell...
     
     cell.sunriseLabel.text = sunrise;
     cell.sunsetLabel.text = sunset;
-    cell.cityLabel.text = city;
+    cell.cityLabel.text = cityText;
     
     return cell;
 }

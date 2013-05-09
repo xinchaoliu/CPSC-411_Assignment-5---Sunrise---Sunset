@@ -60,6 +60,7 @@
 		02994AA0173C4B1D00AA38C3 /* utility.c in Sources */ = {isa = PBXBuildFile; fileRef = 02994A7B173C4B1D00AA38C3 /* utility.c */; };
 		02994AA1173C4B1D00AA38C3 /* venus.c in Sources */ = {isa = PBXBuildFile; fileRef = 02994A7C173C4B1D00AA38C3 /* venus.c */; };
 		02994AA2173C4B1D00AA38C3 /* vsop87.c in Sources */ = {isa = PBXBuildFile; fileRef = 02994A7D173C4B1D00AA38C3 /* vsop87.c */; };
+		02994AA5173C55EF00AA38C3 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 02994AA4173C55EF00AA38C3 /* ViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -162,6 +163,8 @@
 		02994A7B173C4B1D00AA38C3 /* utility.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = utility.c; sourceTree = "<group>"; };
 		02994A7C173C4B1D00AA38C3 /* venus.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = venus.c; sourceTree = "<group>"; };
 		02994A7D173C4B1D00AA38C3 /* vsop87.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = vsop87.c; sourceTree = "<group>"; };
+		02994AA3173C55EF00AA38C3 /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		02994AA4173C55EF00AA38C3 /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -220,6 +223,8 @@
 				024F032C173BFD820017B730 /* MainTableViewController.m */,
 				0296C1BF173C08CD0055F547 /* timeCell.h */,
 				0296C1C0173C08CD0055F547 /* timeCell.m */,
+				02994AA3173C55EF00AA38C3 /* ViewController.h */,
+				02994AA4173C55EF00AA38C3 /* ViewController.m */,
 				0296C1CF173C30600055F547 /* StateTableViewController.h */,
 				0296C1D0173C30600055F547 /* StateTableViewController.m */,
 				0296C1D2173C30710055F547 /* CityTableViewController.h */,
@@ -434,6 +439,7 @@
 				02994AA0173C4B1D00AA38C3 /* utility.c in Sources */,
 				02994AA1173C4B1D00AA38C3 /* venus.c in Sources */,
 				02994AA2173C4B1D00AA38C3 /* vsop87.c in Sources */,
+				02994AA5173C55EF00AA38C3 /* ViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

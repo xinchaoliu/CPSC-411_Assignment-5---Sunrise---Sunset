@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "CityDatabase.h"
 #import "CityDBData.h"
+#import "MainTableViewController.h"
 
 @interface CityTableViewController : UITableViewController
 

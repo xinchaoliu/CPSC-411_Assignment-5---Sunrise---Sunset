@@ -108,12 +108,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1038" y="-681"/>
+            <point key="canvasLocation" x="816" y="-722"/>
         </scene>
         <!--View Controller - Sunrise & Sunset-->
         <scene sceneID="O02-89-I6o">
             <objects>
-                <viewController id="Jbi-9l-oh3" sceneMemberID="viewController">
+                <viewController id="Jbi-9l-oh3" customClass="ViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="laf-yV-yv1">
                         <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -128,7 +128,7 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="2" kind="push" id="C1V-Q7-G1Y"/>
+                                    <segue destination="2" kind="push" id="JVk-Qm-Ihf"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2u0-iC-ocX">
@@ -141,7 +141,7 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="grz-gJ-K5s" kind="push" id="z0d-Dq-8cw"/>
+                                    <segue destination="grz-gJ-K5s" kind="push" identifier="stateSegue" id="z0d-Dq-8cw"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -161,7 +161,7 @@
             </objects>
             <point key="canvasLocation" x="364" y="29"/>
         </scene>
-        <!--State Table View Controller-->
+        <!--State Table View Controller - Select State-->
         <scene sceneID="PCQ-Pb-4Df">
             <objects>
                 <viewController id="grz-gJ-K5s" customClass="StateTableViewController" sceneMemberID="viewController">
@@ -184,13 +184,13 @@
                             </tableViewCell>
                         </prototypes>
                     </tableView>
-                    <navigationItem key="navigationItem" id="k2h-jY-kcj"/>
+                    <navigationItem key="navigationItem" title="Select State" id="k2h-jY-kcj"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8xm-Hd-RoQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="924" y="29"/>
+            <point key="canvasLocation" x="836" y="29"/>
         </scene>
-        <!--City Table View Controller-->
+        <!--City Table View Controller - Select City-->
         <scene sceneID="nPn-bh-HVY">
             <objects>
                 <tableViewController id="zfd-G9-UOA" customClass="CityTableViewController" sceneMemberID="viewController">
@@ -199,14 +199,17 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="1" green="0.80000001190000003" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cityCell" id="Ikz-7e-x2t">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cityCell" id="Ikz-7e-x2t">
                                 <rect key="frame" x="0.0" y="46" width="320" height="46"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                    <rect key="frame" x="10" y="1" width="300" height="43"/>
+                                    <rect key="frame" x="10" y="1" width="280" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
+                                <connections>
+                                    <segue destination="2" kind="push" id="xpZ-QJ-Obq"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -214,11 +217,11 @@
                             <outlet property="delegate" destination="zfd-G9-UOA" id="Cv1-vP-xpO"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="gxD-Di-Rco"/>
+                    <navigationItem key="navigationItem" title="Select City" id="gxD-Di-Rco"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NWH-ju-Ru3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1349" y="29"/>
+            <point key="canvasLocation" x="1278" y="29"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="ifB-O4-qtc">
@@ -253,6 +256,9 @@
         <class className="StateTableViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/StateTableViewController.h"/>
         </class>
+        <class className="ViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/ViewController.h"/>
+        </class>
         <class className="timeCell" superclassName="UITableViewCell">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/timeCell.h"/>
             <relationships>
@@ -267,4 +273,7 @@
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
+    <inferredMetricsTieBreakers>
+        <segue reference="xpZ-QJ-Obq"/>
+    </inferredMetricsTieBreakers>
 </document>
