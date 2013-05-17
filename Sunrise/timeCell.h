@@ -12,6 +12,12 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *cityLabel;
 @property (weak, nonatomic) IBOutlet UILabel *sunriseLabel;
+@property (weak, nonatomic) IBOutlet UILabel *sunriseLocalLabel;
+
 @property (weak, nonatomic) IBOutlet UILabel *sunsetLabel;
+@property (weak, nonatomic) IBOutlet UILabel *sunsetLocalLabel;
+
+@property (weak, nonatomic) IBOutlet UILabel *timeLabel;
+@property (weak, nonatomic) IBOutlet UILabel *dateLabel;
 
 @end

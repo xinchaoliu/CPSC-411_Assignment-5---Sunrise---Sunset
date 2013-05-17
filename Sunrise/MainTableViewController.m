@@ -25,6 +25,9 @@
 @synthesize sunset;
 @synthesize theCity;
 @synthesize cityText;
+@synthesize timeString;
+@synthesize dateString;
+@synthesize timeZone;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -64,7 +67,13 @@
             [locationManager startUpdatingLocation];
         }
         geocoder = [[CLGeocoder alloc]init];
-    }    
+    }
+    
+    // Set current time
+    [NSTimer scheduledTimerWithTimeInterval:1.0
+                                     target:self
+                                   selector:@selector(myTimer:)
+                                   userInfo:nil repeats:YES];
 }
 
 - (void)didReceiveMemoryWarning
@@ -143,16 +152,59 @@
          cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"timeCell";
-    timeCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier
+    self.cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier
                                                      forIndexPath:indexPath];
     
     // Configure the cell...
     
-    cell.sunriseLabel.text = sunrise;
-    cell.sunsetLabel.text = sunset;
-    cell.cityLabel.text = cityText;
+    // sunrise time
+    self.cell.sunriseLabel.text =
+        [NSString stringWithFormat:@"%@ %@",sunrise,timeZone];
     
-    return cell;
+    // Convert local time with timezone
+    NSDateFormatter* localFormatter = [[NSDateFormatter alloc]init];
+    [localFormatter setTimeZone:
+     [NSTimeZone timeZoneWithName:theCity.time_zone]];
+    [localFormatter setDateFormat:@"HH:mm:ss zzz"];
+    self.cell.sunriseLocalLabel.text =
+        [localFormatter stringFromDate:[sunTime objectAtIndex:0]];
+    
+    
+    // sunset time
+    self.cell.sunsetLabel.text =
+    [NSString stringWithFormat:@"%@ %@",sunset,timeZone];
+    
+    // Convert local time with timezone
+    self.cell.sunsetLocalLabel.text =
+    [localFormatter stringFromDate:[sunTime objectAtIndex:1]];
+    
+
+    self.cell.cityLabel.text = cityText;
+
+    return self.cell;
+}
+
+- (void) myTimer:(NSTimer*)timer
+{
+    NSDateFormatter* dateFormatter = [[NSDateFormatter alloc] init];
+    // set current date
+    [dateFormatter setDateFormat:@"YYYY-MM-dd"];
+    NSDate* date = [NSDate date];
+    [[NSDate date]timeIntervalSince1970];
+    dateString = [dateFormatter stringFromDate:date];    
+    self.cell.dateLabel.text = dateString;
+    
+    // set current time
+    [dateFormatter setDateFormat:@"HH:mm:ss zzz"];
+    timeString = [dateFormatter stringFromDate:date];    
+    self.cell.timeLabel.text = timeString;
+    
+    // get timezone
+    [dateFormatter setDateFormat:@"zzz"];
+    timeZone = [dateFormatter stringFromDate:date];
+    
+    // Reload the view
+    [self.tableView reloadData];
 }
 
 @end

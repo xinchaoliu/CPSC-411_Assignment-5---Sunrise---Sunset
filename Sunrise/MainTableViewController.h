@@ -14,6 +14,9 @@
 
 @interface MainTableViewController : UITableViewController <CLLocationManagerDelegate>
 
+// timeCell Class
+@property (strong, nonatomic) timeCell* cell;
+
 // Used for GPS data
 @property BOOL isUsingSelectedCity;
 @property (strong, nonatomic) CLLocationManager* locationManager;
@@ -31,9 +34,15 @@
 // The city info get by manually select
 @property (strong, nonatomic) CityDBData* theCity;
 
-
-
 // city label text
 @property (strong, nonatomic) NSString* cityText;
+
+// Keep the clock running
+- (void) myTimer:(NSTimer *)timer;
+
+// CurrentTimeLabel text
+@property (strong, nonatomic) NSString* timeString;
+@property (strong, nonatomic) NSString* dateString;
+@property (strong, nonatomic) NSString* timeZone;
 
 @end
