@@ -5,6 +5,16 @@
 //  Created by Xinchao Liu on 5/9/13.
 //  Copyright (c) 2013 Assignment5. All rights reserved.
 //
+//  Email: leo_liu@csu.fullerton.edu
+//
+//  Due: 23:59, May.17, 2013
+//
+//  File Description: There are two way to navigate to this view: using GPS or
+//                    select city from the list. This view shows both the
+//                    sunrise & sunset time, in user's timezone time or in local
+//                    time. Also the user can see their own current time & date.
+//                    When using GPS, the location data will keep changing, and
+//                    show the current place and sun time.
 
 #import "MainTableViewController.h"
 
@@ -164,7 +174,7 @@
     // Convert local time with timezone
     NSDateFormatter* localFormatter = [[NSDateFormatter alloc]init];
     [localFormatter setTimeZone:
-     [NSTimeZone timeZoneWithName:theCity.time_zone]];
+     [NSTimeZone timeZoneWithName:[self fixedTimeZone:theCity.time_zone]]];
     [localFormatter setDateFormat:@"HH:mm:ss zzz"];
     self.cell.sunriseLocalLabel.text =
         [localFormatter stringFromDate:[sunTime objectAtIndex:0]];
@@ -205,6 +215,38 @@
     
     // Reload the view
     [self.tableView reloadData];
+}
+
+// standardise the timezone
+- (NSString*) fixedTimeZone:(NSString*)theTimeZone
+{
+    NSString* fixedTimeZone;
+    if ([theTimeZone isEqualToString:@"Mountain"]) {
+        fixedTimeZone = @"America/Denver";
+    } else if ([theTimeZone isEqualToString:@"Arizona"]) {
+        fixedTimeZone = @"America/Phoenix";
+    } else if ([theTimeZone isEqualToString:@"Alaska"]) {
+        fixedTimeZone = @"America/Halifax";
+    } else if ([theTimeZone isEqualToString:@"America/Indianapolis"]) {
+        fixedTimeZone = @"America/New_York";
+    } else if ([theTimeZone isEqualToString:@"America/Puerto_Rico"]) {
+        fixedTimeZone = @"America/Halifax";
+    } else if ([theTimeZone isEqualToString:@"America/Virgin"]) {
+        fixedTimeZone = @"America/Halifax";
+    } else if ([theTimeZone isEqualToString:@"Central"]) {
+        fixedTimeZone = @"America/Chicago";
+    } else if ([theTimeZone isEqualToString:@"Eastern"]) {
+        fixedTimeZone = @"America/New_York";
+    } else if ([theTimeZone isEqualToString:@"Hawaii"]) {
+        fixedTimeZone = @"Pacific/Honolulu";
+    } else if ([theTimeZone isEqualToString:@"Pacific/Guam"]) {
+        fixedTimeZone = @"Pacific/Guam";
+    } else if ([theTimeZone isEqualToString:@"Pacific/Saipan"]) {
+        fixedTimeZone = @"Pacific/Saipan";
+    } else if ([theTimeZone isEqualToString:@"Pacific/Samoa"]) {
+        fixedTimeZone = @"Pacific/Niue";
+    }
+    return fixedTimeZone;
 }
 
 @end
